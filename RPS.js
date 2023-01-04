@@ -1,3 +1,15 @@
+//declare the game rules as an object
+const RULES = {
+    Rock: {win: ["Scissor"], "Scissors": " crushes "},
+    Paper: {win: ["Rock"], "Rock": " wraps "},
+    Scissors: {win: ["Paper"], "Paper": " cuts "}
+}
+
+
+//list of all symbols
+const SYMBOLS = ["Rock", "Paper", "Scissors"]
+
+
 //capitalize
 function capitalize(toCapitalize) {
     //new variable capitalized (string, undefined)
@@ -7,18 +19,29 @@ function capitalize(toCapitalize) {
     //add lower case rest
     capitalized += toCapitalize.slice(1).toLowerCase();
     //return result
-    return capitalized
+    return capitalized;
 }
 
 
 //getUserSymbol
 function getUserSymbol(){
+    //new variable correctInput (boolean, false)
+    let correctInput = false;
     //new variable userSymbol (string, undefined)
-    //fill userSymbol with userInput
-    let userSymbol = prompt("Enter Rock, Paper or Scissors: ")
-    //capitalize userSymbol
+    let userSymbol
+    //while not correctInput ask for input
+    while (!correctInput) {
+        //fill userSymbol with userInput
+        let userSymbol = prompt("Enter Rock, Paper or Scissors: ");
+        //capitalize userSymbol
+        userSymbol = capitalize(userSymbol);
+        //change correctInput if input was correct
+        if (SYMBOLS.includes(userSymbol)) {
+            correctInput = true;
+        }
+    }
     //return userSymbol
-    return capitalize(userSymbol)
+    return userSymbol
 }
 
 
@@ -46,59 +69,23 @@ function getComputerSymbol() {
 
 
 //determineRoundWinner depends upon userSymbol, computerSymbol
-function determineRoundWinner(userSymbol, computerSymbol) {
-    //new variable winner (string, undefined)
+function getRoundWinner(userSymbol, computerSymbol) {
+    //new variable winner
     let winner;
-    //userSymbol acts as switch
-    switch (userSymbol) {
-        //userSymbol is Rock
-        case "Rock":
-            //computerSymbol acts as switch
-            switch (computerSymbol) {
-                //fill winner
-                case "Rock":
-                    winner = "Tie";
-                    break;
-                case "Paper":
-                    winner = "Computer";
-                    break;
-                case "Scissors":
-                    winner = "User"
-                    break;
-            }
-            break;
-        //userSymbol is Paper
-        case "Paper":
-            //computerSymbol acts as switch
-            switch (computerSymbol) {
-                //fill winner
-                case "Rock":
-                    winner = "User";
-                    break;
-                case "Paper":
-                    winner = "Tie";
-                    break;
-                case "Scissors":
-                    winner = "Computer"
-                    break;
-            }
-            break;
-        //userSymbol is Scissors
-        case "Scissors":
-            //computerSymbol acts as switch
-            switch (computerSymbol) {
-                //fill winner
-                case "Rock":
-                    winner = "Computer";
-                    break;
-                case "Paper":
-                    winner = "User";
-                    break;
-                case "Scissors":
-                    winner = "Tie"
-                    break;
-            }
-            break;
+    //check if tie and print the correct message
+    if (userSymbol == computerSymbol) {
+        winner = "Tie";
+        console.log("It's a tie. You both picked " + userSymbol + ".");
+    }
+    //otherwise check if user wins and print the correct message
+    else if (RULES[userSymbol].win.includes(computerSymbol)) {
+        winner = "User";
+        console.log("You win! Your " + userSymbol + RULES[userSymbol][computerSymbol] + "the computer's " + computerSymbol +".")
+    }
+    //otherwiese check if computer wins and print the correct message
+    else if (RULES[computerSymbol].win.includes(userSymbol)) {
+        winner = "Computer";
+        console.log("You loose! The computer's " + computerSymbol + RULES[computerSymbol][userSymbol] + "your " + userSymbol +".")
     }
     //return winner
     return winner
@@ -156,12 +143,11 @@ function game() {
         //fill computerSymbol with getComputerSymbol
         computerSymbol = getComputerSymbol();
         //fill roundWinner with determineRoundWinner
-        roundWinner = determineRoundWinner(userSymbol, computerSymbol)
+        roundWinner = getRoundWinner(userSymbol, computerSymbol)
         //updateScore
         if (roundWinner == "User") {userScore++}
         else if (roundWinner == "Computer") {computerScore++}
-        //output roundMessage
-        console.log(composeRoundMessage(userSymbol, computerSymbol,roundWinner));
+        //output score
         console.log(`Score: User: ${userScore} Points     Computer: ${computerScore} Points`)
     }
     //fill winner with determineWinner
@@ -173,6 +159,5 @@ function game() {
     else if (winner == "Computer") {console.log("You loose!")}
     console.log(`Final score: User: ${userScore} Points     Computer: ${computerScore} Points`)
 }
-
 
 game();
