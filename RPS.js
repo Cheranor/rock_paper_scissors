@@ -119,6 +119,24 @@ function composeRoundMessage(userSymbol, computerSymbol, roundWinner) {
 }
 
 
+function playRound() {
+    //new variable userSymbol (string, undefined)
+    let userSymbol;
+    //new variable computerSymbol (string, undefined)
+    let computerSymbol;
+    //new variable roundWinner (string, undefined)
+    let roundWinner;
+    //fill userSymbol with getUserSymbol
+    userSymbol = getUserSymbol();
+    //fill computerSymbol with getComputerSymbol
+    computerSymbol = getComputerSymbol();
+    //fill roundWinner with determineRoundWinner
+    roundWinner = getRoundWinner(userSymbol, computerSymbol)
+
+    return roundWinner;
+}
+
+
 //gameloop
 function game() {
     //output greeting
@@ -132,18 +150,8 @@ function game() {
     let winner = "Tie";
     //repeat 5 times:
     for (i=1; i <=5; i++) {
-        //new variable userSymbol (string, undefined)
-        let userSymbol;
-        //new variable computerSymbol (string, undefined)
-        let computerSymbol;
-        //new variable roundWinner (string, undefined)
-        let roundWinner;
-        //fill userSymbol with getUserSymbol
-        userSymbol = getUserSymbol();
-        //fill computerSymbol with getComputerSymbol
-        computerSymbol = getComputerSymbol();
-        //fill roundWinner with determineRoundWinner
-        roundWinner = getRoundWinner(userSymbol, computerSymbol)
+        //play a single round
+        let roundWinner = playRound();
         //updateScore
         if (roundWinner == "User") {userScore++}
         else if (roundWinner == "Computer") {computerScore++}
