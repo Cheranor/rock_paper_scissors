@@ -32,7 +32,7 @@ function getUserSymbol(){
     //while not correctInput ask for input
     while (!correctInput) {
         //fill userSymbol with userInput
-        let userSymbol = prompt("Enter Rock, Paper or Scissors: ");
+        userSymbol = prompt("Enter Rock, Paper or Scissors: ");
         //capitalize userSymbol
         userSymbol = capitalize(userSymbol);
         //change correctInput if input was correct
