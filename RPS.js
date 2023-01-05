@@ -168,4 +168,4 @@ function game() {
     console.log(`Final score: User: ${userScore} Points     Computer: ${computerScore} Points`)
 }
 
-game();
+//game();
