@@ -6,9 +6,17 @@
     <script src="./rps-ui.js" defer></script>
 </head>
 <body>
-    <button id="Rock" class="symbolButton"><img src="./images/rock.png" width="60px"></button>
-    <button id="Paper" class="symbolButton"><img src="./images/paper.png" width="60px"></button>
-    <button id="Scissors" class="symbolButton"><img src="./images/scissors.png" width="60px"></button>
+    <button id="startButton">New Game</button>
+
+    <div id="symbolButtonsContainer">
+        <button id="Rock" class="symbolButton" disabled="true"><img src="./images/rock.png" width="60px"></button>
+        <button id="Paper" class="symbolButton" disabled="true"><img src="./images/paper.png" width="60px"></button>
+        <button id="Scissors" class="symbolButton" disabled="true"><img src="./images/scissors.png" width="60px"></button>
+    </div>
+    
+    <div id="gameMessage">Let's play a game of Rock Paper Scissors! Press "New Game" to start a new game.</div>
+    <div id="roundMessage"></div>
+    <div id="scoreMessage"></div>
     
 </body>
 </html>
